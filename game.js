@@ -5,6 +5,7 @@ var buttonColours = ["red", "blue", "green", "yellow"];
 var gamePattern = [];
 var userClickedPattern = [];
 var level = 0;
+var key = 0;
 
 //Button Click Function
 $(".btn").click(function () {
@@ -20,7 +21,14 @@ $(".btn").click(function () {
 //Keyboard key press function
 $(document).on('keypress', function (event) {
   $("h1").text("Level 0");
-  nextSequence();
+  if (key === 0) {
+    nextSequence();
+    key++;
+  } else {
+    checkAnswer(0);
+  }
+  console.log(key);
+
 });
 
 
@@ -44,6 +52,7 @@ function checkAnswer(currentLevel) {
       }, 1000);
     }
   } else {
+    key = 0;
     playSound("wrong");
     $("body").attr("class", "game-over");
     setTimeout(function () {
